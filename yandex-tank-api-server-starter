@@ -2,8 +2,7 @@
 import argparse
 import logging
 
-import yandex_tank_api.manager
-
+from yandex_tank_api import manager
 
 def parse_options():
     """ parse command line options """
@@ -29,13 +28,13 @@ def parse_options():
         '--lock-dir',
         action='store',
         dest='lock_dir',
-        default='/Users/e.zaripov/study/iu-feedback-control-orchestrator/yandex-tank-api/scripts/lock-dir',
+        default='/yandex-tank-api/lock-dir',
         help='Directory for lock file')
     parser.add_argument(
         '--configs-location',
         action='store',
         help='set location to look for default yandex-tank configs in',
-        default='/Users/e.zaripov/study/iu-feedback-control-orchestrator/yandex-tank-api/venv/lib/python3.9/site-packages/',
+        default='/etc',
         dest='configs_location')
     parser.add_argument(
         '--ignore-machine-defaults',
@@ -63,6 +62,6 @@ if __name__ == '__main__':
     options = parse_options()
 
     try:
-        yandex_tank_api.manager.run_server(options)
+        manager.run_server(options)
     except:
         logging.exception('Uncaught exception:')
