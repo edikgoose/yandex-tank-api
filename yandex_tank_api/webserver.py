@@ -17,7 +17,7 @@ import yaml
 import yandex_tank_api.common as common
 from retrying import retry
 from yandextank.validator.validator import TankConfig
-from yandextank.core.consoleworker import load_core_base_cfg, load_local_base_cfgs
+from yandextank.core.tankworker import load_core_base_cfg, load_local_base_cfgs
 
 TRANSFER_SIZE_LIMIT = 128 * 1024
 DEFAULT_HEARTBEAT_TIMEOUT = 600
@@ -77,12 +77,12 @@ class ValidateConfgiHandler(APIHandler):  # pylint: disable=R0904
         except AssertionError as aexc:
             self.reply_reason(400, repr(aexc))
             return
-        _, errors, configinitial = TankConfig(
+        configinitial, _ = TankConfig(
             [load_core_base_cfg()] + load_local_base_cfgs() + [config],
             with_dynamic_options=False
         ).validate()
 
-        self.reply_json(200, {'config': yaml.safe_dump(config), 'errors': errors})
+        self.reply_json(200, {'config': yaml.safe_dump(config), 'errors': ""})
         return
 
 

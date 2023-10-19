@@ -17,7 +17,7 @@ def parse_options():
     parser.add_argument(
         '--work-dir',
         help='Working directory (for tests, etc).',
-        default='/var/lib/yandex-tank-api',
+        default='./output',
         dest='work_dir')
     parser.add_argument(
         '--log',
@@ -29,13 +29,13 @@ def parse_options():
         '--lock-dir',
         action='store',
         dest='lock_dir',
-        default='/var/lock',
+        default='/Users/e.zaripov/study/iu-feedback-control-orchestrator/yandex-tank-api/scripts/lock-dir',
         help='Directory for lock file')
     parser.add_argument(
         '--configs-location',
         action='store',
         help='set location to look for default yandex-tank configs in',
-        default='/etc',
+        default='/Users/e.zaripov/study/iu-feedback-control-orchestrator/yandex-tank-api/venv/lib/python3.9/site-packages/',
         dest='configs_location')
     parser.add_argument(
         '--ignore-machine-defaults',

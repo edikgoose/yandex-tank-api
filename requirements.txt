@@ -1,2 +1,3 @@
 tornado==5.1.1
-yandextank>=1.11
+yandextank>=1.9.3
+boto==2.49.0

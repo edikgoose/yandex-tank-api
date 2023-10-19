@@ -15,7 +15,8 @@ import itertools as itt
 import time
 
 import yandextank.core as tankcore
-import yandextank.core.consoleworker as core_console
+import yandextank.core.tankworker as core_console
+import yandextank.common.interfaces
 import threading
 
 # Yandex.Tank.Api modules
@@ -48,7 +49,7 @@ class TankCore(tankcore.TankCore):
     """
 
     def __init__(self, tank_worker, configs, **kwargs):
-        super(TankCore, self).__init__(configs, threading.Event(), **kwargs)
+        super(TankCore, self).__init__(configs, threading.Event(), yandextank.common.interfaces.TankInfo({}))
         self.tank_worker = tank_worker
 
     def publish(self, publisher, key, value):
@@ -147,7 +148,7 @@ class TankWorker(object):
             itt.chain(
                 [core_console.load_core_base_cfg()]
                     if not self.ignore_machine_defaults else [],
-                self.__get_configs_from_dir('{}/yandex-tank/'.format(self.configs_location))
+                self.__get_configs_from_dir('{}/yandextank/'.format(self.configs_location))
                     if not self.ignore_machine_defaults else [],
                 self.__get_configs_from_dir('.'),
                 )
@@ -246,7 +247,7 @@ class TankWorker(object):
             'break': self.break_at,
             'failures': self.failures,
             'retcode': self.retcode,
-            'tank_status': self.core.status,
+            # 'tank_status': self.core.status,
         }
         self.manager_queue.put(msg)
         if self.locked:
