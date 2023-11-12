@@ -2,6 +2,7 @@
 """
 Yandex.Tank HTTP API: request handling code
 """
+import logging
 
 import tornado.httpserver
 import tornado.ioloop
@@ -99,6 +100,7 @@ class RunHandler(APIHandler):  # pylint: disable=R0904
         hb_timeout = self.get_argument('heartbeat', None)
 
         config = self.request.body
+        logging.info(f"Request for test run. Config: {config}")
 
         # 503 if any running session exists
         if self.srv.running_id is not None:

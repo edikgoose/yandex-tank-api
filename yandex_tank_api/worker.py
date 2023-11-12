@@ -49,6 +49,7 @@ class TankCore(tankcore.TankCore):
     """
 
     def __init__(self, tank_worker, configs, **kwargs):
+        logging.info(f"Creation tank core: {configs}")
         super(TankCore, self).__init__(configs, threading.Event(), yandextank.common.interfaces.TankInfo({}))
         self.tank_worker = tank_worker
 

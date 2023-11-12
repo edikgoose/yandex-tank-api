@@ -4,8 +4,6 @@ lock-dir
 output
 examples
 .gitignore
-.flake8
-.style.yapf
 Dockerfile
 docker-compose.yml
 LICENSE
